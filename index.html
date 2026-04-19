@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Chan Jiunn Hwa - Solution Lead & Full Stack Developer</title>
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            background-color: #e2e8f0;
+            padding: 2rem 1rem;
+        }
+
+        /* Print-optimized container */
+        .resume {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .resume {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+            .section, .job, .education-item, .cert-item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            h2 {
+                break-after: avoid;
+            }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            .print-friendly {
+                break-inside: avoid;
+            }
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem 2rem;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            border-left: 3px solid #ffd700;
+            padding-left: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+        }
+
+        .contact-info span, .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Section Headers */
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e3c72;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.3rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Summary */
+        .summary {
+            background: #f7fafc;
+            padding: 1rem;
+            border-left: 4px solid #2a5298;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-item {
+            background: #f7fafc;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            border-left: 3px solid #ffd700;
+        }
+
+        /* Skills Section */
+        .skills-category {
+            margin-bottom: 1rem;
+        }
+
+        .skills-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-tag {
+            background: #edf2f7;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #2d3748;
+        }
+
+        /* Work Experience */
+        .job {
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1e3c72;
+        }
+
+        .job-company {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .job-date {
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        .job-description {
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            padding-left: 1rem;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .job-description ul {
+            padding-left: 1.2rem;
+            margin: 0.3rem 0;
+        }
+
+        .job-description li {
+            margin: 0.25rem 0;
+        }
+
+        .achievement-highlight {
+            color: #2a5298;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        /* Education & Certs */
+        .education-item, .cert-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .edu-degree {
+            font-weight: 700;
+        }
+
+        .edu-school {
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .edu-date {
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        /* Two-column layout for some sections */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .two-columns {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .contact-info {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* GitHub Projects */
+        .project-item {
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #a0aec0;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume">
+        <div class="header">
+            <div class="name">CHAN JIUNN HWA</div>
+            <div class="title">Solution Lead & Full Stack Developer with Cross-Domain Expertise</div>
+            <div class="contact-info">
+                <span>📞 +65-89315688</span>
+                <span>✉️ <a href="mailto:zeonchan01@gmail.com">zeonchan01@gmail.com</a></span>
+                <span>🔗 <a href="#">linkedin.com/in/zeonchan</a></span>
+                <span>🐙 <a href="#">github.com/jiunnhwa</a></span>
+                <span>📍 Singaporean/Male</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Professional Summary -->
+            <h2>Professional Summary</h2>
+            <div class="summary">
+                Versatile Solution Lead with over two decades of experience spearheading projects across Logistics, FX Broker Solutions, Travel, eCommerce, and Telco. 
+                Highly experienced in all SDLC roles including solution manager, system analyst, full stack/backend developer, test and devops engineer, server and network engineer. 
+                Track record of path-finding and delivering innovative solutions in uncharted scenarios, driving technology adoption, streamlining operations, and executing projects that conform to industry trends, regulatory requirements and customer needs.
+            </div>
+
+            <!-- Key Achievements -->
+            <h2>Key Achievements</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">🏆 First MAS-approved retail FX solution in Singapore (beat Currenex/Bloomberg)</div>
+                <div class="achievement-item">⚡ Jenkins pipeline improvement: 3+ hours → &lt;1 minute (100X++)</div>
+                <div class="achievement-item">🎖️ FedEx ITD Hall of Fame for Taiwan Warehouse System/Express Broker</div>
+                <div class="achievement-item">📊 Custom Clearance System: 99.9% service delivery, 25%++ process improvement</div>
+            </div>
+
+            <!-- Technical Skills -->
+            <h2>Technical Skills</h2>
+            <div class="skills-category">
+                <div class="skills-title">Languages</div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Rust</span><span class="skill-tag">Golang</span><span class="skill-tag">Python</span>
+                    <span class="skill-tag">C#</span><span class="skill-tag">C/C++</span><span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Java</span><span class="skill-tag">Solidity</span><span class="skill-tag">SQL</span>
+                </div>
+            </div>
+            <div class="skills-category">
+                <div class="skills-title">Frameworks & Tools</div>
+                <div class="skills-tags">
+                    <span class="skill-tag">.NET/Blazor</span><span class="skill-tag">Node.js</span><span class="skill-tag">React</span>
+                    <span class="skill-tag">Docker</span><span class="skill-tag">Jenkins</span><span class="skill-tag">K8s</span>
+                    <span class="skill-tag">AWS/GCP/Azure</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Microservices</span>
+                </div>
+            </div>
+            <div class="skills-category">
+                <div class="skills-title">Databases & Analytics</div>
+                <div class="skills-tags">
+                    <span class="skill-tag">MySQL/PostgreSQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Redis</span>
+                    <span class="skill-tag">Pandas</span><span class="skill-tag">Machine Learning</span><span class="skill-tag">Data Analytics</span>
+                </div>
+            </div>
+
+            <!-- Work Experience -->
+            <h2>Work Experience</h2>
+            
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title">Senior Software Engineer</span>
+                    <span class="job-date">Aug 2022 – Nov 2023</span>
+                </div>
+                <div class="job-company">Thales DIS - Smart Cards</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Enhanced Jenkins CI/CD pipeline from 3+ hours to &lt;1 minute (100X++)</li>
+                        <li>Built automated regression finder using C#/Python/Jupyter, extracting data from Jenkins/BitBucket APIs</li>
+                        <li>Created A/B comparison dashboards with Plotly/DataTables, saving man-days and reducing user fatigue</li>
+                    </ul>
+                    <div class="achievement-highlight">✨ Achievement: 100X build time improvement, first-month impact</div>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title">Senior Software Engineer</span>
+                    <span class="job-date">Jan 2022 – Jul 2022</span>
+                </div>
+                <div class="job-company">Thales GTS (Singapore MRT NEL Line)</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Resolved a "ghostly" intermittent bug (ventilation fan auto-on) unsolved for years by veteran engineers</li>
+                        <li>Built Pandas-based log analyzer processing 1M+ lines across rotated logs</li>
+                        <li>Reverse-engineered 100K+ LOC C/C++ codebase, refactored nested conditionals and state machine issues</li>
+                        <li>Gained proficiency in MODBUS/SCADA protocols and CORBA/TAO with Wireshark GIOP analysis</li>
+                    </ul>
+                    <div class="achievement-highlight">✨ Closed 3+ year open KPI for ComfortDelgro/LTA</div>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title">Solution Consultant</span>
+                    <span class="job-date">Jan 2016 – Dec 2020</span>
+                </div>
+                <div class="job-company">AugustOne (Independent Consultancy)</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Developed Golang/NoSQL search & cache engine for travel startup (Expedia/Amadeus APIs → REST API)</li>
+                        <li>Built FX Algo Trader (MQL/C#/MySQL) and MT4 copy trading plugin (C++/FIX bridge)</li>
+                        <li>Consulted for Beijing-based FX broker on MT4 implementation, STP solutions, co-location, latency optimization</li>
+                    </ul>
+                    <div class="achievement-highlight">✨ 20%++ cost savings for multiple clients</div>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title">Solutions Manager</span>
+                    <span class="job-date">Apr 2012 – May 2016</span>
+                </div>
+                <div class="job-company">Integral Development Corporation (US FinTech)</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Led delivery of first MAS-approved retail FX trading platform in Singapore against Currenex/Bloomberg</li>
+                        <li>Managed TRM documentation for MAS+BNM compliance (data security, privacy, DR/BCP)</li>
+                        <li>Led pre-sales & solutioning for end-to-end trade chain (market making → distribution → retail execution)</li>
+                        <li>Advised on FIX/FINXML/Kondor+ messaging, infrastructure sizing, NY4 DC connectivity</li>
+                    </ul>
+                    <div class="achievement-highlight">✨ 2+ year RFP-to-approval process, first in Singapore</div>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <span class="job-title">Team Lead</span>
+                    <span class="job-date">Apr 1996 – Jun 2006</span>
+                </div>
+                <div class="job-company">Federal Express (FedEx)</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Re-developed 3-tier Customs Brokerage Systems (Sybase/Java/JSP)</li>
+                        <li>Planned wireless scanning system (C/C++) achieving 7,000 pieces/hour throughput, &lt;5s response time</li>
+                        <li>First air express company to implement XML-EDI trade declarations to SNS (Crimsonlogic)</li>
+                        <li>Improved brokerage clearance process by 100%+, reduced support calls by 100%+</li>
+                    </ul>
+                    <div class="achievement-highlight">🏆 FedEx ITD Hall of Fame (HK Express Broker & Taiwan Express Broker)</div>
+                </div>
+            </div>
+
+            <!-- Two-column layout for Education + Certifications -->
+            <div class="two-columns">
+                <div>
+                    <h2>Education</h2>
+                    <div class="education-item">
+                        <div class="edu-degree">Certificate in GoLang Programming</div>
+                        <div class="edu-school">Ngee Ann Polytechnic, Singapore</div>
+                        <div class="edu-date">Jan 2021 – Sep 2021</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">MBA in Strategic Management</div>
+                        <div class="edu-school">Nanyang Technological University</div>
+                        <div class="edu-date">Jul 1999 – Jun 2003</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">Graduate Diploma in System Analysis</div>
+                        <div class="edu-school">Institute of System Science (NUS)</div>
+                        <div class="edu-date">Sep 1994 – Jul 1995</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">BA in Philosophy & Sociology</div>
+                        <div class="edu-school">National University of Singapore</div>
+                        <div class="edu-date">Jul 1991 – Jun 1993</div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Certifications</h2>
+                    <div class="cert-item">🔗 SMU Certified Blockchain Developer (2022)</div>
+                    <div class="cert-item">📊 IBF-STS Data Science Certificate (2022)</div>
+                    <div class="cert-item">🌐 CCNA (2011)</div>
+                </div>
+            </div>
+
+            <!-- GitHub Projects (condensed) -->
+            <h2>Select GitHub Projects</h2>
+            <div class="two-columns">
+                <div>
+                    <div class="project-item">• <strong>BTC-Predictor</strong> – ML price predictor (Python/Rust)</div>
+                    <div class="project-item">• <strong>MPASS</strong> – Messaging REST service (Golang/MySQL)</div>
+                    <div class="project-item">• <strong>EPIC</strong> – Scriptable API testing tool (Golang/SQLite)</div>
+                    <div class="project-item">• <strong>BlazorNoteApp</strong> – Web note app (C#/EFCore/SQLite)</div>
+                </div>
+                <div>
+                    <div class="project-item">• <strong>MT4 Trade Copier</strong> – MQL/C# trade replication</div>
+                    <div class="project-item">• <strong>PySelenium</strong> – Browser automation framework</div>
+                    <div class="project-item">• <strong>NewsGet</strong> – News aggregator (Golang/MySQL)</div>
+                    <div class="project-item">• <strong>ServiceBroker</strong> – Load balancer/proxy (Golang)</div>
+                </div>
+            </div>
+
+            <!-- Fun Projects Note -->
+            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #4a5568; font-style: italic;">
+                ⚡ Full list & demos: <a href="#">github.com/jiunnhwa</a> | A-H-A WebApp (Node/Express/Postgres/htmx) hosted on fly.io
+            </div>
+
+            <hr>
+
+            <!-- Additional Info (condensed from original) -->
+            <div style="font-size: 0.8rem; color: #4a5568;">
+                <strong>🎯 Beyond Tech:</strong> Former secondary school teacher (MOE) & SAF Infantry Section Leader – trained weakest recruits to top performance. 
+                MBA thesis on "Idle Hours for Innovation" – balancing productivity with creativity in organizational design.
+            </div>
+
+            <footer>
+                📄 Online version | Last updated: 2026 | Print-friendly resume
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
