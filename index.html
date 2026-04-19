@@ -5,6 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Chan Jiunn Hwa - Solution Lead & Full Stack Developer</title>
     <style>
+        /* CSS Variables for Light/Dark mode */
+        :root {
+            --bg-body: #e2e8f0;
+            --bg-resume: white;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --header-bg-start: #1e3c72;
+            --header-bg-end: #2a5298;
+            --header-text: white;
+            --summary-bg: #f7fafc;
+            --summary-border: #2a5298;
+            --achievement-bg: #f7fafc;
+            --achievement-border: #ffd700;
+            --skill-tag-bg: #edf2f7;
+            --skill-tag-text: #2d3748;
+            --border-light: #e2e8f0;
+            --job-border: #e2e8f0;
+            --footer-text: #a0aec0;
+            --button-bg: #e2e8f0;
+            --button-text: #2d3748;
+            --button-hover: #cbd5e0;
+        }
+
+        body.dark {
+            --bg-body: #0f172a;
+            --bg-resume: #1e293b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e6;
+            --text-light: #94a3b8;
+            --header-bg-start: #0f172a;
+            --header-bg-end: #1e3a8a;
+            --header-text: #e2e8f0;
+            --summary-bg: #334155;
+            --summary-border: #60a5fa;
+            --achievement-bg: #334155;
+            --achievement-border: #fbbf24;
+            --skill-tag-bg: #475569;
+            --skill-tag-text: #e2e8f0;
+            --border-light: #475569;
+            --job-border: #475569;
+            --footer-text: #64748b;
+            --button-bg: #334155;
+            --button-text: #e2e8f0;
+            --button-hover: #475569;
+        }
+
         /* Reset & Base */
         * {
             margin: 0;
@@ -15,27 +62,62 @@
         body {
             font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.5;
-            color: #2d3748;
-            background-color: #e2e8f0;
+            color: var(--text-primary);
+            background-color: var(--bg-body);
             padding: 2rem 1rem;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Print-optimized container */
         .resume {
             max-width: 1100px;
             margin: 0 auto;
-            background: white;
+            background: var(--bg-resume);
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
             border-radius: 8px;
             overflow: hidden;
+            transition: background 0.3s;
         }
 
-        /* Print styles */
+        /* Control Bar for Dark Mode + PDF */
+        .control-bar {
+            max-width: 1100px;
+            margin: 0 auto 1rem auto;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            padding: 0 0.5rem;
+        }
+
+        .control-btn {
+            background: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Print styles - hide controls when printing */
         @media print {
             body {
                 background: white;
                 padding: 0;
                 margin: 0;
+            }
+            .control-bar {
+                display: none;
             }
             .resume {
                 box-shadow: none;
@@ -56,13 +138,21 @@
             .print-friendly {
                 break-inside: avoid;
             }
+            body.dark .resume {
+                background: white;
+            }
+            body.dark {
+                --text-primary: black;
+                --text-secondary: #333;
+            }
         }
 
         /* Header Section */
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
+            color: var(--header-text);
             padding: 2rem 2rem 1.5rem 2rem;
+            transition: background 0.3s;
         }
 
         .name {
@@ -92,7 +182,7 @@
         }
 
         .contact-info span, .contact-info a {
-            color: white;
+            color: var(--header-text);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -112,8 +202,8 @@
         h2 {
             font-size: 1.3rem;
             font-weight: 600;
-            color: #1e3c72;
-            border-bottom: 2px solid #e2e8f0;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-light);
             padding-bottom: 0.3rem;
             margin: 1.5rem 0 1rem 0;
         }
@@ -124,12 +214,13 @@
 
         /* Summary */
         .summary {
-            background: #f7fafc;
+            background: var(--summary-bg);
             padding: 1rem;
-            border-left: 4px solid #2a5298;
+            border-left: 4px solid var(--summary-border);
             margin-bottom: 1rem;
             font-size: 0.95rem;
             line-height: 1.6;
+            transition: background 0.3s;
         }
 
         /* Achievements Grid */
@@ -141,11 +232,12 @@
         }
 
         .achievement-item {
-            background: #f7fafc;
+            background: var(--achievement-bg);
             padding: 0.75rem;
             font-size: 0.9rem;
             border-radius: 6px;
-            border-left: 3px solid #ffd700;
+            border-left: 3px solid var(--achievement-border);
+            transition: background 0.3s;
         }
 
         /* Skills Section */
@@ -155,7 +247,7 @@
 
         .skills-title {
             font-weight: 700;
-            color: #2d3748;
+            color: var(--text-primary);
             margin-bottom: 0.3rem;
             font-size: 0.9rem;
         }
@@ -168,11 +260,12 @@
         }
 
         .skill-tag {
-            background: #edf2f7;
+            background: var(--skill-tag-bg);
             padding: 0.2rem 0.6rem;
             border-radius: 20px;
             font-size: 0.8rem;
-            color: #2d3748;
+            color: var(--skill-tag-text);
+            transition: background 0.3s, color 0.3s;
         }
 
         /* Work Experience */
@@ -192,24 +285,24 @@
         .job-title {
             font-weight: 700;
             font-size: 1rem;
-            color: #1e3c72;
+            color: var(--text-primary);
         }
 
         .job-company {
             font-weight: 600;
-            color: #4a5568;
+            color: var(--text-secondary);
         }
 
         .job-date {
             font-size: 0.8rem;
-            color: #718096;
+            color: var(--text-light);
         }
 
         .job-description {
             font-size: 0.9rem;
             margin-top: 0.3rem;
             padding-left: 1rem;
-            border-left: 2px solid #e2e8f0;
+            border-left: 2px solid var(--job-border);
         }
 
         .job-description ul {
@@ -219,10 +312,11 @@
 
         .job-description li {
             margin: 0.25rem 0;
+            color: var(--text-secondary);
         }
 
         .achievement-highlight {
-            color: #2a5298;
+            color: var(--summary-border);
             font-weight: 500;
             margin-top: 0.3rem;
             font-size: 0.85rem;
@@ -231,20 +325,22 @@
         /* Education & Certs */
         .education-item, .cert-item {
             margin-bottom: 0.75rem;
+            color: var(--text-secondary);
         }
 
         .edu-degree {
             font-weight: 700;
+            color: var(--text-primary);
         }
 
         .edu-school {
             font-weight: 500;
-            color: #4a5568;
+            color: var(--text-secondary);
         }
 
         .edu-date {
             font-size: 0.8rem;
-            color: #718096;
+            color: var(--text-light);
         }
 
         /* Two-column layout for some sections */
@@ -273,40 +369,66 @@
                 gap: 0.8rem;
                 font-size: 0.75rem;
             }
+            .control-bar {
+                padding: 0 0.5rem;
+            }
+            .control-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
         }
 
         /* GitHub Projects */
         .project-item {
             font-size: 0.85rem;
             margin-bottom: 0.3rem;
+            color: var(--text-secondary);
         }
 
         hr {
             margin: 1rem 0;
             border: none;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-light);
         }
 
         footer {
             text-align: center;
             font-size: 0.7rem;
-            color: #a0aec0;
+            color: var(--footer-text);
             padding: 1rem;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-light);
             margin-top: 1rem;
+        }
+
+        a {
+            color: var(--summary-border);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="resume">
+    <div class="control-bar">
+        <button class="control-btn" id="pdfDownloadBtn" onclick="downloadPDF()">
+            📄 Download PDF
+        </button>
+        <button class="control-btn" id="darkModeToggle" onclick="toggleDarkMode()">
+            🌙 Dark Mode
+        </button>
+    </div>
+
+    <div class="resume" id="resumeContent">
         <div class="header">
             <div class="name">CHAN JIUNN HWA</div>
             <div class="title">Solution Lead & Full Stack Developer with Cross-Domain Expertise</div>
             <div class="contact-info">
                 <span>📞 +65-89315688</span>
                 <span>✉️ <a href="mailto:zeonchan01@gmail.com">zeonchan01@gmail.com</a></span>
-                <span>🔗 <a href="#">linkedin.com/in/zeonchan</a></span>
-                <span>🐙 <a href="#">github.com/jiunnhwa</a></span>
+                <span>🔗 <a href="https://linkedin.com/in/zeonchan" target="_blank">linkedin.com/in/zeonchan</a></span>
+                <span>🐙 <a href="https://github.com/jiunnhwa" target="_blank">github.com/jiunnhwa</a></span>
                 <span>📍 Singaporean/Male</span>
             </div>
         </div>
@@ -387,7 +509,7 @@
                         <li>Reverse-engineered 100K+ LOC C/C++ codebase, refactored nested conditionals and state machine issues</li>
                         <li>Gained proficiency in MODBUS/SCADA protocols and CORBA/TAO with Wireshark GIOP analysis</li>
                     </ul>
-                    <div class="achievement-highlight">✨ Closed 3+ year open KPI for ComfortDelgro/LTA</div>
+                    <div class="achievement-highlight">✨ Closed 3+ year open KPI for Comfortdelgro/LTA</div>
                 </div>
             </div>
 
@@ -492,22 +614,104 @@
             </div>
 
             <!-- Fun Projects Note -->
-            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: #4a5568; font-style: italic;">
-                ⚡ Full list & demos: <a href="#">github.com/jiunnhwa</a> | A-H-A WebApp (Node/Express/Postgres/htmx) hosted on fly.io
+            <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-light); font-style: italic;">
+                ⚡ Full list & demos: <a href="https://github.com/jiunnhwa" target="_blank">github.com/jiunnhwa</a> | A-H-A WebApp (Node/Express/Postgres/htmx) hosted on fly.io
             </div>
 
             <hr>
 
             <!-- Additional Info (condensed from original) -->
-            <div style="font-size: 0.8rem; color: #4a5568;">
+            <div style="font-size: 0.8rem; color: var(--text-light);">
                 <strong>🎯 Beyond Tech:</strong> Former secondary school teacher (MOE) & SAF Infantry Section Leader – trained weakest recruits to top performance. 
                 MBA thesis on "Idle Hours for Innovation" – balancing productivity with creativity in organizational design.
             </div>
 
             <footer>
-                📄 Online version | Last updated: 2026 | Print-friendly resume
+                📄 Online resume | Last updated: 2026 | Print-friendly | <span id="modeIndicator">Light mode</span>
             </footer>
         </div>
     </div>
+
+    <script>
+        // Dark Mode Toggle Function
+        function toggleDarkMode() {
+            const body = document.body;
+            const btn = document.getElementById('darkModeToggle');
+            const modeIndicator = document.getElementById('modeIndicator');
+            
+            body.classList.toggle('dark');
+            
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+                btn.innerHTML = '☀️ Light Mode';
+                if (modeIndicator) modeIndicator.textContent = 'Dark mode';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                btn.innerHTML = '🌙 Dark Mode';
+                if (modeIndicator) modeIndicator.textContent = 'Light mode';
+            }
+        }
+
+        // Load saved dark mode preference
+        function loadDarkModePreference() {
+            const darkMode = localStorage.getItem('darkMode');
+            const btn = document.getElementById('darkModeToggle');
+            const modeIndicator = document.getElementById('modeIndicator');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark');
+                if (btn) btn.innerHTML = '☀️ Light Mode';
+                if (modeIndicator) modeIndicator.textContent = 'Dark mode';
+            } else {
+                document.body.classList.remove('dark');
+                if (btn) btn.innerHTML = '🌙 Dark Mode';
+                if (modeIndicator) modeIndicator.textContent = 'Light mode';
+            }
+        }
+
+        // PDF Download Function
+        function downloadPDF() {
+            // Store current dark mode state
+            const wasDark = document.body.classList.contains('dark');
+            
+            // Temporarily remove dark mode for clean PDF (optional - comment out to keep dark mode in PDF)
+            if (wasDark) {
+                document.body.classList.remove('dark');
+            }
+            
+            // Hide control bar for PDF
+            const controlBar = document.querySelector('.control-bar');
+            if (controlBar) {
+                controlBar.style.display = 'none';
+            }
+            
+            // Trigger browser print (Save as PDF)
+            window.print();
+            
+            // Restore control bar after print dialog closes
+            setTimeout(() => {
+                if (controlBar) {
+                    controlBar.style.display = 'flex';
+                }
+                // Restore dark mode if it was enabled
+                if (wasDark) {
+                    document.body.classList.add('dark');
+                }
+            }, 100);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDarkModePreference();
+            
+            // Optional: Add keyboard shortcut for dark mode toggle (Ctrl/Cmd + Shift + D)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+                    e.preventDefault();
+                    toggleDarkMode();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
